@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Petualangan Aljabar Kelas 7 - Interaktif & Seru!</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for friendly icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Comic Neue & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            fredoka: ['Fredoka', 'sans-serif'],
+            quicksand: ['Quicksand', 'sans-serif']
+          },
+          colors: {
+            funYellow: '#FCD34D',
+            funOrange: '#FB923C',
+            funBlue: '#38BDF8',
+            funGreen: '#4ADE80',
+            funPurple: '#A78BFA'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      user-select: none;
+    }
+    .title-font {
+      font-family: 'Fredoka', cursive;
+    }
+    .scale-beam {
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: center center;
+    }
+    .pan-left, .pan-right {
+      transition: transform 0.5s ease;
+    }
+    /* Bounce on hover */
+    .bounce-hover:hover {
+      transform: translateY(-3px) scale(1.02);
+      transition: all 0.2s ease;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 via-sky-50 to-indigo-50 min-h-screen text-slate-800 pb-16">
+
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-sky-100 shadow-sm py-3 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center text-white text-xl shadow-md shadow-sky-200">
+          <i class="fa-solid fa-shapes"></i>
+        </div>
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold title-font text-indigo-950 tracking-wide">Aljabar Seru! <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-semibold">Kelas 7 SMP</span></h1>
+          <p class="text-xs text-slate-500">Pahami konsepnya dengan mudah, santai & menyenangkan ✨</p>
+        </div>
+      </div>
+
+      <!-- Quick Nav Buttons -->
+      <div class="flex items-center gap-2">
+        <button onclick="scrollToSection('materi')" class="px-3 py-1.5 rounded-xl bg-sky-100 text-sky-700 hover:bg-sky-200 text-sm font-bold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-book-open"></i> Materi Dasar
+        </button>
+        <button onclick="scrollToSection('timbangan')" class="px-3 py-1.5 rounded-xl bg-purple-100 text-purple-700 hover:bg-purple-200 text-sm font-bold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-scale-balanced"></i> Lab Timbangan
+        </button>
+        <button onclick="scrollToSection('latihan')" class="px-3 py-1.5 rounded-xl bg-amber-400 text-amber-950 hover:bg-amber-500 text-sm font-bold transition flex items-center gap-1.5 shadow-sm shadow-amber-200">
+          <i class="fa-solid fa-trophy"></i> 15 Latihan Soal
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-4 md:px-8 mt-8 space-y-12">
+
+    <section class="bg-gradient-to-r from-indigo-600 via-sky-500 to-teal-400 rounded-3xl p-6 md:p-10 text-white shadow-xl shadow-indigo-200/50 relative overflow-hidden">
+      <div class="relative z-10 max-w-2xl space-y-4">
+        <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-wider">
+          💡 Apa sih Aljabar itu?
+        </span>
+        <h2 class="text-3xl md:text-4xl font-black title-font leading-tight">
+          Aljabar itu seperti bermain "Tebak Isi Kotak Misteri"! 🎁
+        </h2>
+        <p class="text-sky-50 text-base md:text-lg leading-relaxed">
+          Jangan takut sama huruf seperti <span class="font-bold underline decoration-yellow-300">x</span> atau <span class="font-bold underline decoration-yellow-300">y</span>! Huruf itu hanyalah <b>kantong atau kotak rahasia</b> yang menyimpan angka tertentu yang belum kita ketahui nilainya.
+        </p>
+        <div class="pt-2 flex flex-wrap gap-3">
+          <button onclick="scrollToSection('materi')" class="bg-yellow-400 hover:bg-yellow-300 text-slate-900 font-bold px-6 py-2.5 rounded-2xl shadow-lg shadow-yellow-500/30 transition transform hover:-translate-y-0.5">
+            Pelajari Istilahnya 🚀
+          </button>
+          <button onclick="scrollToSection('latihan')" class="bg-white/20 hover:bg-white/30 text-white border border-white/40 font-bold px-5 py-2.5 rounded-2xl transition">
+            Langsung Tes 15 Soal 🎯
+          </button>
+        </div>
+      </div>
+      <!-- Decorative icon backdrop -->
+      <div class="absolute -right-6 -bottom-6 text-white/10 text-9xl pointer-events-none select-none font-bold">
+        x + 5 = 12
+      </div>
+    </section>
+
+    <section id="materi" class="space-y-6">
+      <div class="text-center md:text-left space-y-1">
+        <h2 class="text-2xl md:text-3xl font-bold title-font text-slate-800 flex items-center justify-center md:justify-start gap-2">
+          <span>🧩</span> Anatomi Aljabar: Kenali Bagian-Bagiannya!
+        </h2>
+        <p class="text-slate-600 text-sm md:text-base">Perhatikan contoh bentuk aljabar: <span class="font-extrabold text-indigo-600 bg-indigo-100 px-3 py-1 rounded-xl text-lg inline-block my-1">4x + 7</span></p>
+      </div>
+
+      <!-- 4 Main Terms Interactive Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Variabel -->
+        <div class="bg-white p-5 rounded-2xl border-2 border-amber-200 shadow-sm hover:shadow-md transition bounce-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl font-black mb-3 italic">
+              x
+            </div>
+            <h3 class="font-bold text-lg text-slate-800 title-font">1. Variabel (Peubah)</h3>
+            <p class="text-sm text-slate-600 mt-2">
+              <b>Huruf lambang pengganti</b> suatu angka yang belum diketahui nilainya.
+            </p>
+          </div>
+          <div class="mt-4 p-2.5 bg-amber-50 rounded-xl text-xs text-amber-800 border border-amber-200">
+            Contoh: Pada <span class="font-bold">4x + 7</span>, variabelnya adalah <span class="font-bold text-amber-600 text-sm">x</span>.
+          </div>
+        </div>
+
+        <!-- Koefisien -->
+        <div class="bg-white p-5 rounded-2xl border-2 border-sky-200 shadow-sm hover:shadow-md transition bounce-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-2xl font-black mb-3">
+              4
+            </div>
+            <h3 class="font-bold text-lg text-slate-800 title-font">2. Koefisien</h3>
+            <p class="text-sm text-slate-600 mt-2">
+              <b>Angka yang menempel langsung di depan huruf</b>. Ini menunjukkan berapa banyak variabel tersebut.
+            </p>
+          </div>
+          <div class="mt-4 p-2.5 bg-sky-50 rounded-xl text-xs text-sky-800 border border-sky-200">
+            Contoh: Pada <span class="font-bold">4x</span>, koefisien dari <span class="font-bold text-sky-600">x</span> adalah <span class="font-bold text-sky-600 text-sm">4</span> (artinya ada 4 kotak x).
+          </div>
+        </div>
+
+        <!-- Konstanta -->
+        <div class="bg-white p-5 rounded-2xl border-2 border-emerald-200 shadow-sm hover:shadow-md transition bounce-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl font-black mb-3">
+              7
+            </div>
+            <h3 class="font-bold text-lg text-slate-800 title-font">3. Konstanta</h3>
+            <p class="text-sm text-slate-600 mt-2">
+              <b>Angka sendirian</b> yang tidak ditempeli huruf apa pun. Nilainya tetap (konstan).
+            </p>
+          </div>
+          <div class="mt-4 p-2.5 bg-emerald-50 rounded-xl text-xs text-emerald-800 border border-emerald-200">
+            Contoh: Pada <span class="font-bold">4x + 7</span>, konstantanya adalah <span class="font-bold text-emerald-600 text-sm">7</span>.
+          </div>
+        </div>
+
+        <!-- Suku Sejenis -->
+        <div class="bg-white p-5 rounded-2xl border-2 border-purple-200 shadow-sm hover:shadow-md transition bounce-hover flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl font-bold mb-3">
+              🍎
+            </div>
+            <h3 class="font-bold text-lg text-slate-800 title-font">4. Suku Sejenis</h3>
+            <p class="text-sm text-slate-600 mt-2">
+              Suku yang memiliki <b>huruf & pangkat yang sama persis</b>. Hanya suku sejenis yang boleh dijumlahkan/dikurangi!
+            </p>
+          </div>
+          <div class="mt-4 p-2.5 bg-purple-50 rounded-xl text-xs text-purple-800 border border-purple-200">
+            Contoh: <span class="font-bold">3 apel + 2 apel = 5 apel</span> (3a + 2a = 5a). Tapi 3 apel + 2 jeruk TIDAK bisa dijumlahkan!
+          </div>
+        </div>
+      </div>
+
+      <!-- Golden Rules of Algebra Box -->
+      <div class="bg-gradient-to-r from-amber-100 to-orange-100 rounded-2xl p-5 border border-amber-300">
+        <h4 class="font-bold text-amber-900 text-base md:text-lg flex items-center gap-2">
+          <i class="fa-solid fa-lightbulb text-amber-600"></i> Rumus Rahasia Pindah Ruas (Prinsip Timbangan):
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mt-3 text-xs md:text-sm text-amber-950">
+          <div class="bg-white/80 p-2.5 rounded-xl border border-amber-200 text-center">
+            Pindah ruas: <br><span class="font-black text-rose-600">Tambah (+)</span> jadi <span class="font-black text-emerald-600">Kurang (-)</span>
+          </div>
+          <div class="bg-white/80 p-2.5 rounded-xl border border-amber-200 text-center">
+            Pindah ruas: <br><span class="font-black text-rose-600">Kurang (-)</span> jadi <span class="font-black text-emerald-600">Tambah (+)</span>
+          </div>
+          <div class="bg-white/80 p-2.5 rounded-xl border border-amber-200 text-center">
+            Pindah ruas: <br><span class="font-black text-rose-600">Kali (×)</span> jadi <span class="font-black text-emerald-600">Bagi (÷)</span>
+          </div>
+          <div class="bg-white/80 p-2.5 rounded-xl border border-amber-200 text-center">
+            Pindah ruas: <br><span class="font-black text-rose-600">Bagi (÷)</span> jadi <span class="font-black text-emerald-600">Kali (×)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timbangan" class="bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-lg">
+      <div class="max-w-2xl mx-auto text-center space-y-2 mb-6">
+        <span class="bg-purple-100 text-purple-700 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+          Eksperimen Langsung
+        </span>
+        <h2 class="text-2xl md:text-3xl font-bold title-font text-slate-800">
+          ⚖️ Laboratorium Timbangan Aljabar
+        </h2>
+        <p class="text-sm md:text-base text-slate-600">
+          Persamaan aljabar itu seperti <b>timbangan yang harus seimbang</b>. Nilai sisi kiri harus sama dengan sisi kanan! Coba utak-atik tombol di bawah untuk melihat nilai <span class="font-bold text-indigo-600">x</span> yang membuat timbangan rata.
+        </p>
+      </div>
+
+      <!-- Scale Visual Representation -->
+      <div class="bg-gradient-to-b from-sky-50 to-indigo-50/50 rounded-2xl p-6 border border-sky-100 flex flex-col items-center">
+        <!-- Equation Display -->
+        <div class="mb-4 bg-white px-6 py-2.5 rounded-2xl shadow-sm border border-slate-200 flex items-center gap-3 text-lg md:text-xl font-bold">
+          <span class="text-indigo-600" id="eq-left">x + 3</span>
+          <span class="text-slate-400">=</span>
+          <span class="text-emerald-600" id="eq-right">8</span>
+          <span id="balance-badge" class="ml-2 text-xs px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 font-bold">Seimbang!</span>
+        </div>
+
+        <!-- Scale Graphic SVG -->
+        <div class="w-full max-w-md h-52 relative flex items-center justify-center">
+          <svg viewBox="0 0 400 220" class="w-full h-full overflow-visible">
+            <!-- Fulcrum Base -->
+            <polygon points="200,140 170,200 230,200" fill="#64748B" />
+            <circle cx="200" cy="140" r="8" fill="#334155" />
+            <rect x="150" y="195" width="100" height="15" rx="5" fill="#334155" />
+
+            <!-- Rotating Beam Group -->
+            <g id="scale-beam-group" class="scale-beam" style="transform: rotate(0deg);">
+              <!-- Beam bar -->
+              <rect x="50" y="136" width="300" height="8" rx="4" fill="#475569" />
+              <circle cx="70" cy="140" r="4" fill="#94A3B8" />
+              <circle cx="330" cy="140" r="4" fill="#94A3B8" />
+
+              <!-- Left Pan Strings & Pan -->
+              <line x1="70" y1="140" x2="50" y2="175" stroke="#94A3B8" stroke-width="2" />
+              <line x1="70" y1="140" x2="90" y2="175" stroke="#94A3B8" stroke-width="2" />
+              <path d="M 40 175 Q 70 190 100 175 Z" fill="#38BDF8" />
+
+              <!-- Right Pan Strings & Pan -->
+              <line x1="330" y1="140" x2="310" y2="175" stroke="#94A3B8" stroke-width="2" />
+              <line x1="330" y1="140" x2="350" y2="175" stroke="#94A3B8" stroke-width="2" />
+              <path d="M 300 175 Q 330 190 360 175 Z" fill="#34D399" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- Value Indicators -->
+        <div class="w-full max-w-md flex justify-between px-6 text-sm font-bold">
+          <div class="text-center">
+            <span class="text-slate-500 block text-xs">Beban Kiri</span>
+            <span id="weight-left-display" class="text-sky-600 text-lg">8</span>
+          </div>
+          <div class="text-center">
+            <span class="text-slate-500 block text-xs">Nilai Rahasia (x)</span>
+            <span id="target-x-display" class="text-indigo-600 text-lg font-black">x = 5</span>
+          </div>
+          <div class="text-center">
+            <span class="text-slate-500 block text-xs">Beban Kanan</span>
+            <span id="weight-right-display" class="text-emerald-600 text-lg">8</span>
+          </div>
+        </div>
+
+        <!-- Controls for testing values of x -->
+        <div class="mt-6 w-full max-w-md bg-white p-4 rounded-xl border border-slate-200">
+          <label class="block text-xs font-bold text-slate-600 mb-2 text-center">
+            Tebak nilai <span class="text-indigo-600 font-extrabold text-sm">x</span> menggunakan slider di bawah:
+          </label>
+          <div class="flex items-center gap-4">
+            <input type="range" id="x-slider" min="0" max="12" value="5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600" oninput="updateInteractiveScale(this.value)">
+            <span id="slider-val" class="font-black text-xl text-indigo-700 w-8 text-center">5</span>
+          </div>
+          <p id="scale-feedback" class="text-xs text-center mt-2 font-bold text-emerald-600">
+            🎉 Keren! x = 5 membuat timbangan seimbang sempurna karena 5 + 3 = 8!
+          </p>
+        </div>
+
+        <!-- Preset Equation Buttons -->
+        <div class="flex flex-wrap gap-2 mt-4 justify-center">
+          <button onclick="setEquation(1, 3, 8)" class="text-xs bg-white hover:bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-lg font-bold text-slate-700 transition">
+            Soal 1: x + 3 = 8
+          </button>
+          <button onclick="setEquation(2, 2, 10)" class="text-xs bg-white hover:bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-lg font-bold text-slate-700 transition">
+            Soal 2: 2x + 2 = 10
+          </button>
+          <button onclick="setEquation(1, 0, 7)" class="text-xs bg-white hover:bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-lg font-bold text-slate-700 transition">
+            Soal 3: x = 7
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="latihan" class="space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+        <div>
+          <span class="bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+            Tantangan Mandiri
+          </span>
+          <h2 class="text-2xl md:text-3xl font-bold title-font text-slate-800 mt-1">
+            🎯 15 Soal Latihan Aljabar Kelas 7
+          </h2>
+          <p class="text-slate-600 text-sm">Pilih jawaban yang menurutmu benar. Dapatkan penjelasan mudah di setiap nomor!</p>
+        </div>
+
+        <!-- Score & Progress Summary -->
+        <div class="flex items-center gap-3 bg-white px-4 py-2.5 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="text-center">
+            <span class="text-xs text-slate-400 block font-semibold">Sudah Dijawab</span>
+            <span id="answered-count" class="font-extrabold text-indigo-600 text-base">0 / 15</span>
+          </div>
+          <div class="h-8 w-px bg-slate-200"></div>
+          <div class="text-center">
+            <span class="text-xs text-slate-400 block font-semibold">Skor Benar</span>
+            <span id="correct-score" class="font-extrabold text-emerald-600 text-base">0</span>
+          </div>
+          <button onclick="resetAllQuestions()" class="ml-2 text-xs text-slate-500 hover:text-rose-600 font-bold p-1 transition" title="Ulangi dari awal">
+            <i class="fa-solid fa-rotate-right"></i> Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap gap-2 text-xs font-bold">
+        <button onclick="filterQuestions('all')" id="filter-all" class="filter-btn active bg-indigo-600 text-white px-3.5 py-1.5 rounded-xl transition">
+          Semua (15)
+        </button>
+        <button onclick="filterQuestions('dasar')" id="filter-dasar" class="filter-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-3.5 py-1.5 rounded-xl transition">
+          Unsur Aljabar (No 1-4)
+        </button>
+        <button onclick="filterQuestions('operasi')" id="filter-operasi" class="filter-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-3.5 py-1.5 rounded-xl transition">
+          Penjumlahan & Pengurangan (No 5-8)
+        </button>
+        <button onclick="filterQuestions('substitusi')" id="filter-substitusi" class="filter-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-3.5 py-1.5 rounded-xl transition">
+          Substitusi Nilai (No 9-11)
+        </button>
+        <button onclick="filterQuestions('plsv')" id="filter-plsv" class="filter-btn bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 px-3.5 py-1.5 rounded-xl transition">
+          Persamaan / Cari Nilai x (No 12-15)
+        </button>
+      </div>
+
+      <!-- Questions List Cards -->
+      <div id="questions-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Dynamically injected via JavaScript -->
+      </div>
+    </section>
+
+    <div id="completion-modal" class="hidden bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl p-6 md:p-8 text-white shadow-xl text-center space-y-4">
+      <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto text-3xl">
+        🎉
+      </div>
+      <h3 class="text-2xl font-bold title-font">Wah, Kamu Hebat Banget!</h3>
+      <p class="max-w-md mx-auto text-emerald-100 text-sm md:text-base" id="completion-text">
+        Kamu telah menyelesaikan semua soal dengan hasil luar biasa. Aljabar ternyata tidak sesulit yang dibayangkan, kan?
+      </p>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="bg-white text-emerald-800 font-bold px-6 py-2.5 rounded-2xl shadow hover:bg-yellow-300 hover:text-slate-900 transition">
+        Kembali ke Atas 🚀
+      </button>
+    </div>
+
+  </main>
+
+  <script>
+    // Smooth scrolling helper
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Interactive Balance Scale Logic
+    let currentScale = {
+      coeff: 1,
+      constant: 3,
+      targetRight: 8,
+      correctX: 5
+    };
+
+    function setEquation(coeff, constant, right) {
+      currentScale.coeff = coeff;
+      currentScale.constant = constant;
+      currentScale.targetRight = right;
+      currentScale.correctX = (right - constant) / coeff;
+
+      const leftText = (coeff === 1 ? 'x' : `${coeff}x`) + (constant > 0 ? ` + ${constant}` : '');
+      document.getElementById('eq-left').innerText = leftText;
+      document.getElementById('eq-right').innerText = right;
+      document.getElementById('target-x-display').innerText = `x = ${currentScale.correctX}`;
+
+      // Reset slider to middle or 1
+      const slider = document.getElementById('x-slider');
+      slider.value = 1;
+      updateInteractiveScale(1);
+    }
+
+    function updateInteractiveScale(val) {
+      val = parseInt(val);
+      document.getElementById('slider-val').innerText = val;
+      
+      const leftWeight = (currentScale.coeff * val) + currentScale.constant;
+      const rightWeight = currentScale.targetRight;
+
+      document.getElementById('weight-left-display').innerText = leftWeight;
+      document.getElementById('weight-right-display').innerText = rightWeight;
+
+      const beam = document.getElementById('scale-beam-group');
+      const badge = document.getElementById('balance-badge');
+      const feedback = document.getElementById('scale-feedback');
+
+      const diff = leftWeight - rightWeight;
+      // Clamp tilt angle between -15 and 15 degrees
+      let angle = diff * 3;
+      if (angle > 14) angle = 14;
+      if (angle < -14) angle = -14;
+
+      beam.style.transform = `rotate(${angle}deg)`;
+
+      if (diff === 0) {
+        badge.className = "ml-2 text-xs px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 font-bold";
+        badge.innerText = "Seimbang! 🎉";
+        feedback.className = "text-xs text-center mt-2 font-bold text-emerald-600";
+        feedback.innerHTML = `🎉 Keren! Ketika <b>x = ${val}</b>, sisi kiri bernilai <b>${leftWeight}</b> dan kanan bernilai <b>${rightWeight}</b> (Sama persis!).`;
+      } else if (diff < 0) {
+        badge.className = "ml-2 text-xs px-2.5 py-1 rounded-full bg-rose-100 text-rose-700 font-bold";
+        badge.innerText = "Kiri Lebih Ringan";
+        feedback.className = "text-xs text-center mt-2 font-semibold text-rose-600";
+        feedback.innerHTML = `Kiri (${leftWeight}) masih lebih kecil dari kanan (${rightWeight}). Coba geser <b>x</b> lebih besar lagi!`;
+      } else {
+        badge.className = "ml-2 text-xs px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 font-bold";
+        badge.innerText = "Kiri Lebih Berat";
+        feedback.className = "text-xs text-center mt-2 font-semibold text-amber-600";
+        feedback.innerHTML = `Kiri (${leftWeight}) keberatan dibandingkan kanan (${rightWeight}). Coba kurangi nilai <b>x</b>!`;
+      }
+    }
+
+    const questions = [
+      {
+        id: 1,
+        category: 'dasar',
+        badge: 'Unsur Aljabar',
+        question: 'Pada bentuk aljabar <b>5x + 9</b>, manakah yang disebut sebagai <b>koefisien</b>?',
+        options: ['x', '5', '9', '5x'],
+        correct: 1, // index for '5'
+        explanation: '<b>Koefisien</b> adalah angka yang menempel langsung di depan huruf (variabel). Di sini, angka di depan <b>x</b> adalah <b>5</b>.'
+      },
+      {
+        id: 2,
+        category: 'dasar',
+        badge: 'Unsur Aljabar',
+        question: 'Pada bentuk aljabar <b>3y - 12</b>, angka <b>-12</b> disebut sebagai...',
+        options: ['Variabel', 'Koefisien', 'Konstanta', 'Suku sejenis'],
+        correct: 2,
+        explanation: '<b>Konstanta</b> adalah angka tunggal yang berdiri sendiri tanpa ada variabel (huruf) yang menempel padanya.'
+      },
+      {
+        id: 3,
+        category: 'dasar',
+        badge: 'Unsur Aljabar',
+        question: 'Berapakah <b>jumlah suku</b> pada bentuk aljabar: <b>2x² - 4x + 7</b>?',
+        options: ['1 suku', '2 suku', '3 suku', '4 suku'],
+        correct: 2,
+        explanation: 'Ada <b>3 suku</b> yang dipisahkan oleh tanda tambah dan kurang, yaitu: <b>2x²</b>, <b>-4x</b>, dan <b>7</b>.'
+      },
+      {
+        id: 4,
+        category: 'dasar',
+        badge: 'Unsur Aljabar',
+        question: 'Pasangan suku manakah di bawah ini yang merupakan <b>suku sejenis</b>?',
+        options: ['3x dan 3y', '5a dan -2a', '4x² dan 4x', '7p dan 7q'],
+        correct: 1,
+        explanation: 'Suku sejenis memiliki <b>huruf dan pangkat yang sama persis</b>. <b>5a</b> dan <b>-2a</b> sama-sama mempunyai huruf <b>a</b> berpangkat 1.'
+      },
+      {
+        id: 5,
+        category: 'operasi',
+        badge: 'Penjumlahan Suku',
+        question: 'Sederhanakan bentuk aljabar ini: <b>4a + 5a = ...</b>',
+        options: ['9a²', '9a', '20a', '9'],
+        correct: 1,
+        explanation: 'Ibaratkan apel: 4 apel + 5 apel = <b>9 apel (9a)</b>. Jumlahkan koefisiennya: (4 + 5)a = 9a.'
+      },
+      {
+        id: 6,
+        category: 'operasi',
+        badge: 'Pengurangan Suku',
+        question: 'Hasil dari <b>8x - 3x + 2 = ...</b>',
+        options: ['5x + 2', '7x', '10x', '5x - 2'],
+        correct: 0,
+        explanation: 'Hanya suku sejenis yang boleh dikurangkan: <b>(8x - 3x) = 5x</b>. Angka 2 adalah konstanta jadi tetap terpisah: <b>5x + 2</b>.'
+      },
+      {
+        id: 7,
+        category: 'operasi',
+        badge: 'Operasi Campuran',
+        question: 'Sederhanakan: <b>(3x + 4y) + (2x - y) = ...</b>',
+        options: ['5x + 5y', '5x + 3y', '6x + 3y', '5x - 3y'],
+        correct: 1,
+        explanation: 'Kelompokkan suku sejenis:<br>• Huruf x: 3x + 2x = <b>5x</b><br>• Huruf y: 4y - y = <b>3y</b><br>Jadi hasilnya adalah <b>5x + 3y</b>.'
+      },
+      {
+        id: 8,
+        category: 'operasi',
+        badge: 'Perkalian Aljabar',
+        question: 'Hasil perkalian dari <b>3(2x + 4) = ...</b>',
+        options: ['6x + 4', '5x + 7', '6x + 12', '6x + 7'],
+        correct: 2,
+        explanation: 'Gunakan sifat distributif (kalikan 3 ke setiap yang ada di dalam kurung):<br>• 3 × 2x = 6x<br>• 3 × 4 = 12<br>Hasilnya = <b>6x + 12</b>.'
+      },
+      {
+        id: 9,
+        category: 'substitusi',
+        badge: 'Substitusi Nilai',
+        question: 'Jika <b>x = 4</b>, berapakah nilai dari <b>3x + 5</b>?',
+        options: ['12', '17', '21', '39'],
+        correct: 1,
+        explanation: 'Ganti huruf x dengan angka 4:<br>3(4) + 5 = 12 + 5 = <b>17</b>.'
+      },
+      {
+        id: 10,
+        category: 'substitusi',
+        badge: 'Substitusi Nilai',
+        question: 'Jika <b>a = 3</b> dan <b>b = 2</b>, berapakah nilai dari <b>2a - 3b + 10</b>?',
+        options: ['10', '16', '6', '12'],
+        correct: 0,
+        explanation: 'Gantikan angka:<br>2(3) - 3(2) + 10<br>= 6 - 6 + 10 = <b>10</b>.'
+      },
+      {
+        id: 11,
+        category: 'substitusi',
+        badge: 'Substitusi Nilai',
+        question: 'Jika <b>y = -2</b>, berapakah nilai dari <b>5 - 2y</b>?',
+        options: ['1', '9', '-1', '-9'],
+        correct: 1,
+        explanation: 'Hati-hati tanda minus bertemu minus:<br>5 - 2(-2) = 5 - (-4) = 5 + 4 = <b>9</b>.'
+      },
+      {
+        id: 12,
+        category: 'plsv',
+        badge: 'Mencari Nilai x (PLSV)',
+        question: 'Tentukan nilai x dari persamaan: <b>x + 7 = 15</b>',
+        options: ['x = 7', 'x = 8', 'x = 22', 'x = 105'],
+        correct: 1,
+        explanation: 'Pindahkan +7 ke ruas kanan menjadi kurang (-):<br>x = 15 - 7<br><b>x = 8</b>. (Cek: 8 + 7 = 15, benar!)'
+      },
+      {
+        id: 13,
+        category: 'plsv',
+        badge: 'Mencari Nilai x (PLSV)',
+        question: 'Tentukan nilai x jika <b>3x = 18</b>',
+        options: ['x = 15', 'x = 21', 'x = 6', 'x = 54'],
+        correct: 2,
+        explanation: '3 dikali berapa yang hasilnya 18? Lawan dari perkalian adalah pembagian:<br>x = 18 ÷ 3<br><b>x = 6</b>.'
+      },
+      {
+        id: 14,
+        category: 'plsv',
+        badge: 'Mencari Nilai x (PLSV)',
+        question: 'Selesaikan persamaan: <b>2x - 4 = 10</b>',
+        options: ['x = 3', 'x = 5', 'x = 7', 'x = 14'],
+        correct: 2,
+        explanation: 'Langkah 1: Pindahkan -4 ke kanan jadi +4:<br>2x = 10 + 4 = 14<br>Langkah 2: Bagi kedua ruas dengan 2:<br>x = 14 ÷ 2 = <b>7</b>.'
+      },
+      {
+        id: 15,
+        category: 'plsv',
+        badge: 'Soal Cerita Sehari-hari',
+        question: 'Ibu membeli <b>3 buku tulis yang sama</b> dan memberikan uang Rp20.000. Ibu mendapat kembalian Rp5.000. Berapa harga 1 buku tulis?',
+        options: ['Rp3.000', 'Rp5.000', 'Rp7.500', 'Rp15.000'],
+        correct: 1,
+        explanation: 'Model aljabarnya: Misal harga buku = b<br>3b + 5.000 = 20.000<br>3b = 20.000 - 5.000 = 15.000<br>b = 15.000 ÷ 3 = <b>Rp5.000</b>.'
+      }
+    ];
+
+    // State tracker for user answers
+    const userAnswers = {};
+
+    function renderQuestions(filter = 'all') {
+      const container = document.getElementById('questions-grid');
+      container.innerHTML = '';
+
+      const filtered = filter === 'all' 
+        ? questions 
+        : questions.filter(q => q.category === filter);
+
+      filtered.forEach((q) => {
+        const isAnswered = userAnswers[q.id] !== undefined;
+        const userAnswer = userAnswers[q.id];
+        const isCorrect = isAnswered && userAnswer === q.correct;
+
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-2xl p-5 border border-slate-200 shadow-sm transition hover:border-indigo-300 flex flex-col justify-between";
+        card.id = `q-card-${q.id}`;
+
+        let optionsHtml = '';
+        const optionLetters = ['A', 'B', 'C', 'D'];
+
+        q.options.forEach((opt, idx) => {
+          let btnClass = "w-full text-left p-3 rounded-xl border text-sm font-semibold transition flex items-center gap-3 ";
+          
+          if (!isAnswered) {
+            btnClass += "border-slate-200 hover:bg-indigo-50 hover:border-indigo-300 text-slate-700";
+          } else {
+            if (idx === q.correct) {
+              btnClass += "border-emerald-500 bg-emerald-50 text-emerald-900 font-bold";
+            } else if (idx === userAnswer) {
+              btnClass += "border-rose-400 bg-rose-50 text-rose-900";
+            } else {
+              btnClass += "border-slate-100 bg-slate-50 text-slate-400 opacity-60";
+            }
+          }
+
+          optionsHtml += `
+            <button 
+              ${isAnswered ? 'disabled' : ''} 
+              onclick="selectAnswer(${q.id}, ${idx})" 
+              class="${btnClass}">
+              <span class="w-7 h-7 rounded-lg ${isAnswered && idx === q.correct ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-600'} flex items-center justify-center text-xs font-bold shrink-0">
+                ${optionLetters[idx]}
+              </span>
+              <span>${opt}</span>
+            </button>
+          `;
+        });
+
+        // Explanation section if already answered
+        let explanationHtml = '';
+        if (isAnswered) {
+          explanationHtml = `
+            <div class="mt-4 p-3.5 rounded-xl ${isCorrect ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-rose-50 border border-rose-200 text-rose-900'} text-xs leading-relaxed animate-fade-in">
+              <div class="font-bold mb-1 flex items-center gap-1.5">
+                <i class="fa-solid ${isCorrect ? 'fa-circle-check text-emerald-600' : 'fa-circle-xmark text-rose-600'}"></i>
+                ${isCorrect ? 'Jawaban Benar!' : 'Kurang Tepat, yuk pelajari pembahasannya:'}
+              </div>
+              <p>${q.explanation}</p>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg">
+                Nomor ${q.id}
+              </span>
+              <span class="text-[11px] font-semibold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                ${q.badge}
+              </span>
+            </div>
+            <h3 class="text-slate-800 font-bold text-sm md:text-base mb-4 leading-snug">
+              ${q.question}
+            </h3>
+            <div class="space-y-2 mb-2">
+              ${optionsHtml}
+            </div>
+          </div>
+          ${explanationHtml}
+        `;
+
+        container.appendChild(card);
+      });
+
+      updateStats();
+    }
+
+    function selectAnswer(questionId, chosenIndex) {
+      if (userAnswers[questionId] !== undefined) return;
+
+      userAnswers[questionId] = chosenIndex;
+      
+      // Determine active filter
+      const activeBtn = document.querySelector('.filter-btn.active');
+      let currentFilter = 'all';
+      if (activeBtn) {
+        currentFilter = activeBtn.id.replace('filter-', '');
+      }
+
+      renderQuestions(currentFilter);
+    }
+
+    function updateStats() {
+      const answeredKeys = Object.keys(userAnswers);
+      const totalAnswered = answeredKeys.length;
+      let correctCount = 0;
+
+      answeredKeys.forEach(id => {
+        const q = questions.find(item => item.id === parseInt(id));
+        if (q && userAnswers[id] === q.correct) {
+          correctCount++;
+        }
+      });
+
+      document.getElementById('answered-count').innerText = `${totalAnswered} / ${questions.length}`;
+      document.getElementById('correct-score').innerText = correctCount;
+
+      // Check if all answered
+      const completionCard = document.getElementById('completion-modal');
+      if (totalAnswered === questions.length) {
+        completionCard.classList.remove('hidden');
+        document.getElementById('completion-text').innerHTML = `
+          Kamu berhasil menjawab <b>${correctCount} dari ${questions.length} soal dengan benar</b>!
+          ${correctCount >= 12 ? 'Luar biasa! Pemahaman aljabarmu sudah sangat matang untuk tingkat kelas 7. 🌟' : 'Bagus sekali usahanya! Coba baca kembali pembahasan soal yang masih keliru ya.'}
+        `;
+      } else {
+        completionCard.classList.add('hidden');
+      }
+    }
+
+    function filterQuestions(category) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-indigo-600', 'text-white');
+        btn.classList.add('bg-white', 'text-slate-600');
+      });
+
+      const activeBtn = document.getElementById(`filter-${category}`);
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-indigo-600', 'text-white');
+        activeBtn.classList.remove('bg-white', 'text-slate-600');
+      }
+
+      renderQuestions(category);
+    }
+
+    function resetAllQuestions() {
+      for (const prop of Object.keys(userAnswers)) {
+        delete userAnswers[prop];
+      }
+      renderQuestions('all');
+    }
+
+    // Initialize application on load
+    window.onload = function() {
+      renderQuestions('all');
+      updateInteractiveScale(5);
+    };
+  </script>
+</body>
+</html>
